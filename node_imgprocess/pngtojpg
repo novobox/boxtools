@@ -1,0 +1,14 @@
+var Jimp = require("jimp");
+
+a = process.argv.slice(2)
+
+var f_src = a[0]
+var f_out = a[1]
+
+// open a file called "lenna.png"
+Jimp.read(f_src, function (err, lenna) {
+    if (err) throw err;
+    lenna.quality(50)                 // set JPEG quality
+        .write(f_out); // save
+    console.log(f_out+' generated');
+});

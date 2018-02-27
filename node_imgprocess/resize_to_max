@@ -1,0 +1,36 @@
+var Jimp = require("jimp");
+
+a = process.argv.slice(2)
+
+console.log(a);
+
+var f_src = a[0];
+var f_out = a[1];
+var width = parseInt(a[2]);
+
+//dim = dim.split('x', 2);
+
+
+
+//console.log("node resize /path/to/image/in path/to/image/out {max_width}x{max_height}")
+//console.log("example : node resize /tmp/test.jpg /tmp/test2.jpg 640x480")
+
+console.log("node resize /path/to/image/in path/to/image/out {max_width}")
+console.log("example : node resize /tmp/test.jpg /tmp/test2.jpg 640")
+
+// open a file called "lenna.png"
+Jimp.read(f_src, function (err, img) {
+
+    if (err) throw err;
+    if(img.bitmap.width > width){
+        X = width;
+        Y = Jimp.AUTO;
+    
+        img.resize(X, Y)
+           .write(f_out); // save
+        console.log(f_out+' resized');
+    }
+    else{
+        console.log(f_out+' skipped');
+    }
+});
